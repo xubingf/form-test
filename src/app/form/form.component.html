@@ -1,0 +1,32 @@
+<div [hidden]="submitted">
+<form (ngSubmit)="onSubmit()" #Form="ngForm">
+  <div>
+  <label for="name">Name:</label>
+  <input id="name" type="text" [(ngModel)]="hero.name" name="name" required #name="ngModel"/>
+    <div [hidden]="name.valid || name.pristine">不能为空</div>
+  </div>
+  <div>
+  <label for="id">id:</label>
+  <input id="id" type="text" [(ngModel)]="hero.id" name="id" required #id="ngModel"/>
+    <div [hidden]="id.valid || id.pristine">不能为空</div>
+  </div>
+  <div>
+    <label for="power">Power</label>
+    <select id="power" name="power" [(ngModel)]="hero.power" required>
+      <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+    </select>
+  </div>
+  <button type="reset" (click)="newHero()">new Hero</button>
+  <button type="submit" [disabled]="Form.form.invalid">Submit</button>
+</form>
+</div>
+<div [hidden]="!submitted">
+  <h2>提交信息:</h2>
+    <div>Name：{{hero.name}}</div>
+    <div>id: {{hero.id}}</div>
+    <div>Power：{{hero.power}}</div>
+  <button (click)="submitted=false">Edit</button>
+</div>
+
+
+
